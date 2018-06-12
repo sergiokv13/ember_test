@@ -1,5 +1,23 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<h1>Front end for Inventory API</h1>
+{{#link-to 'index'}}
+  Home
+{{/link-to}}
 
-{{outlet}}
+{{#link-to 'techs'}}
+  Local techs
+{{/link-to}}
+
+{{#if isAuthenticated}}
+  <button {{action 'logout'}}>Logout</button>
+  {{outlet}}
+{{else}}
+  <form {{action "authenticate" on="submit"}}>
+    {{input value=userId placeholder="Enter user id"}}
+    {{userIdError}}
+    <br>
+    {{input value=locationId placeholder="Enter location id"}}
+    {{locationIdError}}
+    <br>
+    <button type='submit'> login </button>
+  </form>
+{{/if}}
